@@ -1,0 +1,12 @@
+void setup(){
+
+pinMode(13, 1);  // we declare pin 13 as output
+}
+
+void loop(){
+
+digitalWrite(13 1);  // we read the valiue in pin 13, the valiue is high 
+delay(1000);   // wait for a second
+digitalWrite(13, 0); // we read the valiue in pin 13, the valiue is low 
+delay(1000);
+}
