@@ -1,0 +1,44 @@
+const int ledRojo =13;
+const int ledAmarillo =11;
+const int ledVerde =9;              // We declare the colors of the traffic light on the pin of the arduino
+const int Rojo =7;
+const int Amarillo =5;
+const int Verde =3;
+
+void setup()
+{
+  pinMode(ledRojo, OUTPUT);
+  pinMode(ledAmarillo, OUTPUT);
+  pinMode(ledVerde, OUTPUT);       // we declare the colors as outputs
+  pinMode(Rojo, OUTPUT);
+  pinMode(Amarillo, OUTPUT);
+  pinMode(Verde, OUTPUT);
+}
+
+void loop()
+{
+ digitalWrite(ledRojo, HIGH); 
+ digitalWrite(Verde, HIGH); 
+  delay(3000);
+ digitalWrite(ledRojo, HIGH);
+  delay(5000);
+ digitalWrite(Verde, LOW);
+  delay(500);
+ digitalWrite(Verde, HIGH);
+  delay(500);
+  digitalWrite(Verde, LOW);
+  delay(500);
+ digitalWrite(Verde, HIGH);          // we show the pines as high and low as we declare the times, in this part the traffic lights will change coordinately  
+  delay(500);
+ digitalWrite(Verde, LOW);
+ digitalWrite(Amarillo, HIGH);
+  delay(2000);
+ digitalWrite(Amarillo, LOW);
+ digitalWrite(ledRojo, LOW);
+ digitalWrite(Rojo, HIGH);
+ digitalWrite(ledVerde, HIGH);
+  delay(4000);
+ digitalWrite(Rojo, HIGH);
+  delay(4000);
+ digitalWrite(ledVerde, HIGH);
+  delay(500);
