@@ -1,0 +1,107 @@
+#include<LiquidCrystal.h>                          // Refers to a library that needs the LCD.
+String mensaje= "PROGRAMA TRES MICROS";            // Message to show.
+
+//Variable configuration and variable type:
+int longitud_texto=mensaje.length();
+const int rs=7,en=8,d4=9,d5=10,d6=11,d7=12;
+LiquidCrystal lcd(rs,en,d4,d5,d6,d7);
+
+// Characters configuration:
+
+byte a[8]={
+  B01110,
+  B01110,
+  B00100,
+  B00100,
+  B00100,
+  B01010,
+  B10001,
+};
+
+
+byte b[8] = {
+  B00000,
+  B00000,
+  B01010,
+  B00000,
+  B10001,
+  B01110,
+  B00000,
+};
+
+byte c[] = {
+  B00000,
+  B01010,
+  B01010,
+  B00000,
+  B01110,
+  B10001,
+  B00000,
+};
+
+byte d[] = {
+  B00000,
+  B11100,
+  B11100,
+  B11100,
+  B00111,
+  B00111,
+  B00101,
+};
+
+byte e[] = {
+  B00100,
+  B01010,
+  B10001,
+  B01010,
+  B00100,
+  B00110,
+  B00100,
+};
+
+void setup(){
+    lcd.createChar(1,a);
+    lcd.createChar(2,b);
+    lcd.createChar(3,c);
+    lcd.createChar(4,d);
+    lcd.createChar(5,e);
+    
+  lcd.begin(16,2);
+  lcd.setCursor(15,0);
+    lcd.write(byte(1));
+    lcd.setCursor(0,0);
+    lcd.write(byte(2));                                 // In this step, the spaces within the LCD are configured so that the characters
+                                                        //can be shown without any problem along the screen
+    lcd.setCursor(3,1);
+    lcd.write(byte(3));
+    lcd.setCursor(6,1);
+    lcd.write(byte(4));
+    lcd.setCursor(8,1);
+    lcd.write(byte(5));
+    lcd.setCursor(10,1);
+  delay(3500);
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.write("Mi frase es:");
+  delay(3500);
+  lcd.clear();
+  }
+              
+void loop(){
+  
+  lcd.setCursor(0,1);
+  lcd.print(mensaje);
+  delay(1500);
+  
+  for(int posicion=0;posicion<longitud_texto;posicion++){
+     lcd.scrollDisplayLeft();
+    delay(300);
+  }
+  for(int posicion=0;posicion<(longitud_texto);posicion){         //Read message
+    lcd.scrollDisplayRight();
+    delay(300);
+  }
+  delay(1000);
+}
+              
+                
