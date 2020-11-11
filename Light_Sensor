@@ -1,0 +1,23 @@
+int LUZ= 4;
+int adc;                // Variables declare
+float volt;
+
+void setup() {
+  pinMode(LUZ, 1);     // "LUZ" was declare as OUTPUT
+
+}
+
+void loop() {
+  
+adc = analogRead(0);
+volt = map(adc,0,1023,0,5000);           // In this step, "adc" reads analog values from 0, and "volt" uses the "map" functions to the find a value in the established ranges,
+if(volt<=1000)                           // if volt finds values less than 1000 it will not turn on the led.
+{
+  digitalWrite(LUZ, 0);
+}
+else
+{
+digitalWrite(LUZ, 1);
+}
+delay(1000);
+}
