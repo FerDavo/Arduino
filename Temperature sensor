@@ -1,0 +1,55 @@
+#include<LiquidCrystal.h>
+const int rs=7,en=8,d4=9,d5=10,d6=11,d7=12;
+LiquidCrystal lcd(rs,en,d4,d5,d6,d7);
+
+float far = 0.00;
+int centi = 0;                   // variables are declared with value 0 to start
+int V_lectura = 0;
+int pin = A5;      // declare "pin" on arduino's analog pin, this for temperature sensor reading 
+
+void setup(){
+  
+  lcd.begin(16,2);
+  pinMode(pin,INPUT);
+  pinMode(6, 1);
+  pinMode(5, 1);              // declare outputs and inputs of arduino analog and digital
+  pinMode(4, 1);
+}
+
+void loop(){
+  
+  lcd.setCursor(0,0);
+  lcd.print("Temperatura: ");    //start the LCD screen 
+  lcd.print("C.F");
+  
+  V_lectura=(float)analogRead(pin);
+  
+  float voltaje = 5.0/1024*V_lectura;   
+                                           //calculations for temperature measurement
+  
+  centi = (voltaje/0.01)-50;
+  
+  if(centi <= 0){
+    digitalWrite(4,1);
+  }else{
+      digitalWrite(4,0);
+  }
+  if(centi >0 && centi <=40){
+    digitalWrite(5,1);
+  }else{
+      digitalWrite(5,0);
+  }
+  if(centi > 40){                         // declare some if to turn on led according to sensor measurement 
+    digitalWrite(6,1);
+  }else{
+    digitalWrite(6,0);
+  }
+  far=(centi*1.8)+32;
+  lcd.setCursor(0,1);
+  lcd.print("C:");
+  lcd.print(centi);                    // results are printed on the LCD screen
+  lcd.print("F:");
+  lcd.print(far);
+  lcd.print(" ");
+  delay(1000);
+}
