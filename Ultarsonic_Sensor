@@ -1,0 +1,42 @@
+#include<LiquidCrystal.h>  // Se incluye la libreria para la pantalla LCD.
+#define TRIGGER 7   // Se define los pines de comunicacion del sensor hacia los pines del arduino.
+#define ECHO 6
+LiquidCrystal lcd(12,11,5,4,3,2);
+int distancia;
+int tiempo;      // se definen otras variables "enteras" globales.
+
+void setup() {
+
+  lcd.begin(16,2);      // se inicia el lcd 
+  pinMode(TRIGGER, 1);  // se declara a TRIGGER como salida y a echo como entrada
+  pinMode(ECHO, 0);
+  
+}
+
+void loop() {
+
+  digitalWrite(TRIGGER, 0);
+  delayMicroseconds(2);
+  digitalWrite(TRIGGER, 1);      // se leen los valores de TRIGGER y se espera unos milisegundos para seguir tomando valores.
+  delayMicroseconds(10);
+  digitalWrite(TRIGGER, 0);
+
+  tiempo = pulseIn(ECHO, 1);     // en la variable "tiempo" se tomara un pulso ya sea alto o bajo y se tomara de ECHO 
+  distancia = (tiempo/2)/29;     // en la variable distancia se tomara la variable tiempo y se haran calculos para medir la distancia  
+
+      if (distancia <=2||distancia>= 500)
+      {
+        lcd.print("");
+      }
+      else 
+       
+      lcd.clear();
+      lcd.setCursor(0,0);
+      lcd.print("LA DISTANCIA");        // se evaluara los valores que de distancia, y despues los mostrara en la pantalla segun se acerque un objeto o se aleje, 
+      lcd.setCursor(0,1);               // esta medida la hara en cm.
+      lcd.print(distancia);
+      lcd.print("  cm");
+
+       delay(500);
+
+}
